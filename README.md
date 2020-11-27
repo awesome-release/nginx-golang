@@ -1,7 +1,7 @@
 ## Verified to work in Release
 This project was derived from the nginx-golang project in [awesome-compose](https://github.com/docker/awesome-compose)
 
-No modifications to this project were necessary to make it work in Release.
+Had to expose port 80 in the backend container. `EXPOSE 80` added to the Dockerfile.
 
 To make this project run in [Release](https://releaseapp.io), simply create a new application with this repository.
 
