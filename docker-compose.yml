@@ -8,3 +8,5 @@ services:
       - backend
   backend:
     build: backend
+    ports:
+      - "8080"
