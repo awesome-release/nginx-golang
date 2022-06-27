@@ -1,0 +1,59 @@
+---
+app: nginx-golang-gitops
+auto_deploy: true
+context: release-handsup-us-east-1
+domain: releaseapp.gethandsup.com
+repo_name: awesome-release/nginx-golang
+hostnames:
+- frontend: frontend-nginx-golang-gitops-${env_id}.${domain}
+environment_templates:
+- name: ephemeral
+- name: permanent
+resources:
+  cpu:
+    limits: 1000m
+    requests: 100m
+  memory:
+    limits: 1Gi
+    requests: 100Mi
+  replicas: 1
+services:
+- name: frontend
+  image: awesome-release/nginx-golang/frontend
+  build:
+    context: frontend
+  has_repo: true
+  static: false
+  depends_on:
+  - backend
+  ports:
+  - type: node_port
+    target_port: '80'
+    port: '80'
+- name: backend
+  image: awesome-release/nginx-golang/backend
+  build:
+    context: backend
+  has_repo: true
+  static: false
+  ports:
+  - type: container_port
+    port: '8080'
+workflows:
+- name: setup
+  parallelize:
+  - step: services
+    tasks:
+    - services.frontend
+    - services.backend
+- name: teardown
+  parallelize:
+  - step: remove_environment
+    tasks:
+    - release.remove_environment
+- name: patch
+  parallelize:
+  - step: services
+    tasks:
+    - services.frontend
+    - services.backend
