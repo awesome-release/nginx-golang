@@ -1,5 +1,5 @@
 ---
-app: nginx-golang-gitops
+app: gitops-nginx-golang
 auto_deploy: true
 context: release-handsup-us-east-1
 domain: releaseapp.gethandsup.com
