@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -22,6 +23,10 @@ func handler(w http.ResponseWriter, r *http.Request) {
 Hello from Docker!
 
 `)
+	responseMsg := os.Getenv("RESPONSE_MESSAGE")
+	if responseMsg != "" {
+		fmt.Fprintf(w, responseMsg)
+	}
 }
 
 func main() {
