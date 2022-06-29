@@ -34,6 +34,7 @@ services:
   image: awesome-release/nginx-golang/backend
   build:
     context: backend
+    target: foo
   has_repo: true
   static: false
   ports:
