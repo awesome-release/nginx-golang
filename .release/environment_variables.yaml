@@ -4,5 +4,5 @@ services:
   frontend: []
   backend:
   - key: RESPONSE_MESSAGE
-    value: Hello from env vars in repo
+    value: Hello from env vars in repo (gitops-2)
 
