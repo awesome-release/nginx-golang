@@ -39,6 +39,9 @@ services:
   ports:
   - type: container_port
     port: '8080'
+  memory:
+    limits: 2Gi
+    requests: 200Mi
 workflows:
 - name: setup
   parallelize:
