@@ -6,6 +6,8 @@ RUN CGO_ENABLED=0 go build -o backend main.go
 
 EXPOSE 80
 
+BREAK
+
 FROM scratch
 COPY --from=build /compose/hello-docker/backend /usr/local/bin/backend
 CMD ["/usr/local/bin/backend"]
