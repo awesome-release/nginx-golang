@@ -39,8 +39,6 @@ services:
   ports:
   - type: container_port
     port: '8080'
-- name: busybox
-  image: busybox
 workflows:
 - name: setup
   parallelize:
@@ -48,7 +46,6 @@ workflows:
     tasks:
     - services.frontend
     - services.backend
-    - services.busybox
 - name: teardown
   parallelize:
   - step: remove_environment
@@ -60,4 +57,3 @@ workflows:
     tasks:
     - services.frontend
     - services.backend
-    - services.busybox
